@@ -22,7 +22,7 @@ function [landed, success, vel] = checkLanding(x, dims, safe_zone, hazard_zone)
 %
 % This function uses the lander body polygon (computed with nozzle deflection = 0).
 
-vel_threshold = 0.2;  % m/s
+vel_threshold = 0.3;  % m/s
 
 % Compute the lander polygon (body) using computeLanderShape (ignore nozzle deflection)
 [px, py, ~, ~] = computeLanderShape(x, dims, 0);

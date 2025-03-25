@@ -11,7 +11,7 @@ theta = x(5);
 
 % Nonlinear dynamics
 x_ddot     = (T * sin(theta + phi)) / m;
-y_ddot     = (m*g - T * cos(theta + phi)) / m;
+y_ddot     = (- m*g + T * cos(theta + phi)) / m;
 theta_ddot = (T * l1 * sin(phi)) / I;
 
 % State derivative vector
