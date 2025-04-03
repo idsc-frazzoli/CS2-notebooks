@@ -1,0 +1,131 @@
+\documentclass[]{beamer}
+\usepackage{tikz}
+\geometry{papersize={13cm, 5cm}}
+\usetikzlibrary{positioning, arrows.meta}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{frametitle}[default][center]
+
+\begin{document}
+\begin{frame}
+    \frametitle{Block Diagram}
+    \vspace{0.25cm}
+    \begin{tikzpicture}[auto, node distance=2cm,>=Latex,
+        input/.style = {coordinate},
+        output/.style = {coordinate},
+        block/.style = {draw, rectangle, minimum height=1cm, minimum width=2cm},
+        sum/.style = {draw, circle, node distance=1cm},
+        ]
+        \node [input](input){};
+        \node [sum, right=of input] (sum) {};
+        \node [block, right=of sum] (controller) {$\alpha$};
+        \node [block, right=of controller] (system) {$P_1$};
+        \node [output, right= 2cm of system] (output) {};
+        \node [block, below left= 1cm and 1cm of system] (feedback) {$P_2$};
+        \node [sum, right= 3.5 cm of feedback] (sum2) {};
+        \node [input, right= 0.5cm of sum2](input2){};
+        
+        \draw [->] (input) -- node {$r(t)$} (sum);
+        \draw [->] (sum) -- node {$e(t)$} (controller);
+        \draw [->] (controller) -- node {$u(t)$} (system);
+        \draw [->] (system) -- node [name=y, pos=0.5] {} (output);
+        \draw (system) -- node [pos=0.8] {$y(t)$} (output);
+        \draw [->] (system) -| (sum2) node[pos=0.95, left] {$+$};
+        \draw [->] (feedback) -| node[pos=0.99, right] {$-$} (sum);
+        \draw [->] (input2) -- node[right= 0.2cm of input]{$n(t)$} (sum2);
+        \draw (input2) -- node[below,pos=0.8]{$+$} (sum2);
+        \draw [->] (sum2) -- (feedback);
+        
+    \end{tikzpicture}
+\end{frame}
+\begin{frame}
+    \frametitle{Block Diagram}
+    \vspace{0.25cm}
+    \begin{tikzpicture}[auto, node distance=2cm,>=Latex,
+        input/.style = {coordinate},
+        output/.style = {coordinate},
+        block/.style = {draw, rectangle, minimum height=1cm, minimum width=2cm},
+        sum/.style = {draw, circle, node distance=1cm, label=center:$+$, minimum size=0.5cm},
+        ]
+        \node [input](input){};
+        \node [sum, right=of input] (sum) {};
+        \node [block, right= 1.5 of sum] (controller) {$P_0$};
+        \node [block, right= 1.5of controller] (system) {$P_1$};
+        \node [output, right= 2cm of system] (output) {};
+        \node [block, below left= 1cm and 1cm of system] (feedback) {$P_2$};
+        \node [sum, right= 3.5 cm of feedback] (sum2) {};
+        \node [input, right= 0.5cm of sum2](input2){};
+        
+        \draw [->] (input) -- node {$w_1(t)$} (sum);
+        \draw [->] (sum) -- node {$e_1(t)$} (controller);
+        \draw [->] (controller) -- node {$u(t)$} (system);
+        \draw [->] (system) -| (sum2) node[pos=0.95, left] {};
+        \draw [->] (feedback) -| node[pos=0.99, right] {} (sum);
+        \draw [->] (input2) -- node[right= 0.2cm of input]{$w_2(t)$} (sum2);
+        \draw (input2) -- node[below,pos=0.8]{} (sum2);
+        \draw [->] (sum2) -- node[above] {$e_2(t)$} (feedback);
+        
+    \end{tikzpicture}
+\end{frame}
+\begin{frame}
+    \scalebox{1.8}[6]{}
+    \frametitle{Block Diagram}{}{}
+    \vspace{0.25cm}
+    \hspace{1cm}
+    \begin{tikzpicture}[auto, node distance=1cm,>=Latex,
+        input/.style = {coordinate},
+        output/.style = {coordinate},
+        split/.style = {coordinate},
+        block/.style = {draw, rectangle, minimum height=0.5cm, minimum width=1cm},
+        sum/.style = {draw, circle, node distance=0.5cm ,minimum size=0.15cm},
+        ]
+        \node [input](input){};
+        \node [sum, right=of input] (sum) {};
+        \node [sum, right= 4cm of sum] (sum2) {};
+        \node [split, right= 0.25cm of sum] (split) {};
+        \node [block, right= 1 of controller] (system) {$P_1$};
+        \node [split, right= 0.25cm of system] (split2) {};
+        \node [output, right= 0.75cm of split2] (output) {};
+        \node [block, above right = 0.5cm and 0.5cm of split] (delta) {$\Delta(s)$};
+        \node [block, right = 0.5cm of delta] (weight) {$W(s)$};
+        \node [block, below left= 0.5cm and 1.5cm of system] (feedback) {$P_2$};
+        
+        \draw [->] (input) -- node {} (sum);
+        \draw [->] (sum) -- node {} (sum2);
+        \draw [->] (split) |- node {} (delta);
+        \draw [->] (delta) -- node {} (weight);
+        \draw [->] (weight) -| node {} (sum2);
+        \draw [->] (sum2) -- node {} (system);
+        \draw [->] (feedback) -| node[pos=0.98, right] {$-$} (sum);
+        \draw [->] (split2) |- node[above] {} (feedback);
+        \draw [->] (system) -- node {} (output);
+    
+        
+    \end{tikzpicture}
+\end{frame}
+\begin{frame}
+    \frametitle{Block Diagram}
+    \begin{center}
+    \vspace{0.25cm}
+    \begin{tikzpicture}[auto, node distance=2cm,>=Latex,
+        input/.style = {coordinate},
+        output/.style = {coordinate},
+        block/.style = {draw, rectangle, minimum height=1cm, minimum width=2cm},
+        sum/.style = {draw, circle, node distance=1cm, label=center:$+$, minimum size=0.5cm},
+        split/.style = {coordinate},
+        ]
+        \node [input](input){};
+        \node [split, right=of input] (split) {};
+        \node [block, right= 1.5 of split] (controller) {$G(s)$};
+        \node [block, below = 1cm of controller] (system) {$\Delta(s)$};
+        \node [output, right= 1.5cm of system] (output) {};
+        \node [split, right= 1.5 cm of system] (split2) {};
+        
+        \draw [->] (split) -- node {} (controller);
+        \draw [->] (split2) -- (system) node {};
+        \draw [-] (controller) -| node{} (split2);
+        \draw [-] (system) -| node {} (split); 
+        
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+\end{document}
