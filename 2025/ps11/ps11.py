@@ -11,7 +11,7 @@ I_sp0 = 300 # s
 m0 = 1250
 m_empty = 600
 
-dt = 0.01
+dt = 0.1
 
 def altitude_to_pressure(altitude: float) -> float:
     return 101325 * np.exp(-altitude / 8500)
@@ -76,10 +76,10 @@ def v_in(t: float, state: np.ndarray, ref: np.ndarray, k_1_x: float = 2.5, k_2_x
     x, x_dot, z, z_dot, theta, theta_dot = state
     x_d, x_dot_d, x_dd_d, z_d, z_dot_d, z_dd_d, theta_d, theta_dot_d, theta_dd_d = ref
 
-    e_x = x_d - x
-    e_x_dot = x_dot_d - x_dot
-    e_theta = theta_d - theta
-    e_theta_dot = theta_dot_d - theta_dot
+    e_x = x - x_d
+    e_x_dot = x_dot - x_dot_d
+    e_theta = theta - theta_d
+    e_theta_dot = theta_dot - theta_dot_d
 
     return np.array([[
         -(1 + k_1_x*k_2_x) * e_x - (k_1_x + k_2_x) * e_x_dot
@@ -116,8 +116,8 @@ def v_out(t: float, state: np.ndarray, ref: np.ndarray, k_z: float = 0.61, k_z_d
     x, x_dot, z, z_dot, theta, theta_dot = state
     x_d, x_dot_d, x_dd_d, z_d, z_dot_d, z_dd_d, theta_d, theta_dot_d, theta_dd_d = ref
 
-    e_z = z_d - z
-    e_z_dot = z_dot_d - z_dot
+    e_z = z - z_d
+    e_z_dot = z_dot - z_dot_d
 
     v_out = -k_z * e_z - k_z_dot * e_z_dot
 
@@ -167,7 +167,7 @@ while mass > m_empty:
 
     pressure = altitude_to_pressure(state[2])
     mass_dot = thrust_to_mass_dot(thrust_input, pressure)
-    mass += mass_dot
+    mass += 0.1*mass_dot
 
     f_a = f_a_input(state)
     tau_a = tau_a_input(state, f_a)
@@ -195,15 +195,16 @@ ref_hist = np.array(ref_hist)
 # Labels for plotting
 state_labels = ['x', 'x_dot', 'z', 'z_dot', 'theta', 'theta_dot']
 ref_labels   = ['x_d', 'x_dot_d', 'x_dd_d', 'z_d', 'z_dot_d', 'z_dd_d', 'theta_d', 'theta_dot_d', 'theta_dd_d']
+# Define the correct mapping from state index to reference index
+ref_indices = [0, 1, 3, 4, 6, 7]
 
-# Plot states vs. references
 for i, label in enumerate(state_labels):
     plt.figure()
     plt.plot(time_hist, state_hist[:, i], label=f'{label} (actual)')
-    plt.plot(time_hist, ref_hist[:, i], '--', label=f'{ref_labels[i]} (ref)')
+    plt.plot(time_hist, ref_hist[:, ref_indices[i]], '--', label=f'{ref_labels[ref_indices[i]]} (ref)')
     plt.xlabel('Time [s]')
     plt.ylabel(label)
-    plt.title(f'{label} vs. {ref_labels[i]}')
+    plt.title(f'{label} vs. {ref_labels[ref_indices[i]]}')
     plt.legend()
     plt.grid(True)
     plt.show()
