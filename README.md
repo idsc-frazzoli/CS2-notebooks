@@ -1,6 +1,6 @@
-# [CS2-2024-notebooks]
+# [CS2-notebooks]
 
-This GitHub repository contains the Juypter notebooks for the [Control Systems II](https://idsc.ethz.ch/education/lectures/control-systems-ii.html) course taught by Prof. Emilio Frazzoli at ETH Zürich, spring semester 2024.
+This GitHub repository contains the Juypter notebooks for the [Control Systems II](https://idsc.ethz.ch/education/lectures/control-systems-ii.html) course taught by Prof. Emilio Frazzoli at ETH Zürich, from spring semester 2024 to spring semester 2026.
 
 ## Getting Started with the Notebooks
 
@@ -16,13 +16,13 @@ Before proceeding, ensure you have Git installed on your system to clone the rep
 
 To clone the repository, open a terminal or command prompt and run the following command:
 
-    git clone https://github.com/idsc-frazzoli/CS2-2024-notebooks.git
+    git clone https://github.com/idsc-frazzoli/CS2-notebooks.git
 
 
 ### Manually Downloading the Notebooks
 
 Alternatively, you can manually download the notebooks:
-1. Navigate to the [GitHub repository](https://github.com/idsc-frazzoli/CS2-2024-notebooks) in your web browser.
+1. Navigate to the [GitHub repository](https://github.com/idsc-frazzoli/CS2-notebooks) in your web browser.
 2. Find the `Code` button and click it, then select `Download ZIP`.
 3. Extract the ZIP file to your desired directory.
 
