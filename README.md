@@ -99,7 +99,9 @@ All notebooks are available on this [CS2 Google Drive folder](https://drive.goog
 ). You need to open the files as a new copy with [Google Colab](https://colab.research.google.com/)
 The kernel runs automatically from the browser and no additional installations must be made. 
 
-## Usage
-Each notebook consists of controls case studies and coding exercises. All dependencies and background functions are handled by the [cs2solutions](https://github.com/idsc-frazzoli/cs2solutions) package. Please ensure that this is installed at the start of the notebook using ```pip install cs2solutions```.
+## Usage (2024 and 2025 Notebooks)
+Each notebook from 2024 and 2025 consists of controls case studies and coding exercises. All dependencies and background functions are handled by the [cs2solutions](https://github.com/idsc-frazzoli/cs2solutions) package. Please ensure that this is installed at the start of the notebook using ```pip install cs2solutions```.
 
 This package contains useful functions, unit tests, and solutions. More information is found on it's official repository: [cs2solutions](https://github.com/idsc-frazzoli/cs2solutions)
+
+Notebooks from 2026 contain the full case studies and code.
